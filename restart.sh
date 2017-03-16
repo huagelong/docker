@@ -1,2 +1,2 @@
 #!/bin/sh
-docker exec -it trensy php /data/www/$0/trensy server:restart
+docker exec -it $0 php /data/www/trensy server:restart
