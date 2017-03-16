@@ -2,16 +2,16 @@ FROM ubuntu:14.04
 
 MAINTAINER kaihui.wang <hpuwang@gmail.com>
 
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse"> /etc/apt/sources.list
-RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse"> /etc/apt/sources.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse">> /etc/apt/sources.list
+RUN echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse">> /etc/apt/sources.list
 
 RUN apt-get update
 
@@ -27,7 +27,7 @@ php7.0-mbstring \
 nginx \
 mysql-server-5.6 \
 redis-server \
-wget \
+wget
 
 RUN cd /tmp \
 && mkdir d \
@@ -36,14 +36,15 @@ RUN cd /tmp \
 && tar zxvf v2.0.6.tar.gz \
 && cd swoole-src-2.0.6 \
 && phpize \
-./configure --with-php-config=$(which php-config)  --enable-coroutine \
-&& make && make install \
-&& echo "extension=swoole.so" > /etc/php/7.0/cli/conf.d/swoole.ini \
+&& ./configure --with-php-config=$(which php-config)  --enable-coroutine \
+&& make \
+&& make install \
+&& echo "extension=swoole.so" > /etc/php/7.0/cli/conf.d/swoole.ini
 
 RUN apt clean && apt autoclean && rm -rf /tmp/d
 
 EXPOSE 8888
 
-RUN mkdir -p /data/www
+RUN mkdir -p /data
 
-WORKDIR /data/www/
+WORKDIR /data
